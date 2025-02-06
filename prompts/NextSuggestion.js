@@ -3,12 +3,8 @@ import {getLast20SolvedProblems,getTopicSlugs,getUserSkillStats} from "../servic
 // import getTopicSlugs from "../services/ProblemServices.js";
 // import getUserSkillStats from "../services/ProblemServices.js";
 
-
-<<<<<<< HEAD
 const OPEN_AI_KEY = process.env.OPEN_AI_KEY;
 
-=======
->>>>>>> 60214fe1dc3b0b6311799083978fce50c5a469b3
 const client = new OpenAI({
     apiKey: OPEN_AI_KEY,
 })
