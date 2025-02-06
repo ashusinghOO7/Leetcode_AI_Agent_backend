@@ -4,8 +4,6 @@ import {getLast20SolvedProblems,getTopicSlugs,getUserSkillStats} from "../servic
 // import getUserSkillStats from "../services/ProblemServices.js";
 
 
-const OPEN_AI_KEY = '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';
-
 const client = new OpenAI({
     apiKey: OPEN_AI_KEY,
 })
