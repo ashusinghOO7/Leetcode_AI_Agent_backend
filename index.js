@@ -10,11 +10,17 @@ const skillStatsQuery = require('./queries/SkillStatsQuery');
 const { acSubmission } = require('./controllers/ACSubmissionController');
 const { submission } = require('./controllers/SubmissionController');
 const selectProblem = require('./controllers/SelectedProblem');
+const apicache = require("apicache");
 
 const API_URL = 'https://leetcode.com/graphql';
 const port = process.env.PORT || 8001;
 
 const app = express();
+
+
+const cache = apicache.middleware;
+
+app.use(cache("5 minutes")); // Cache responses for 5 minutes
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,7 +51,7 @@ app.listen(port, () => {
 // app.get('/select', selectProblem);
 
 app.get('/chat', async (req, res) => {
-    const userPrompt = req.query.userprompt; 
+    const userPrompt = req.query.userPrompt; 
 
     if (!userPrompt) {
         return res.status(400).json({ error: "userprompt query parameter is required" });

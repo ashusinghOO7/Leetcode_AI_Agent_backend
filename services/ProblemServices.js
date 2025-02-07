@@ -147,6 +147,35 @@ async function getUserSkillStats(username) {
         return err;
       }
     }
+
+async function getQuestionDetails(titleSlug) {
+  try {
+    const response = await fetch('https://leetcode.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Referer: 'https://leetcode.com',
+      },
+      body: JSON.stringify({
+        query: selectedProblemquery,
+        variables: {
+          titleSlug, //search question using titleSlug
+        },
+      }),
+    });
+
+    const result = await response.json();
+
+    if (result.errors) {
+      return null;
+    }
+
+    return formatQuestionData(result.data);
+  } catch (err) {
+    console.error('Error: ', err);
+    return err;
+  }
+}
     
 
 // Make another function to store the accuracy of each topic
@@ -154,5 +183,6 @@ async function getUserSkillStats(username) {
 module.exports = {
     getLast20SolvedProblems,
     getTopicSlugs,
-    getUserSkillStats
+    getUserSkillStats,
+    getQuestionDetails
 };
